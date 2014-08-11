@@ -4,32 +4,51 @@ var Monster = {
 		this.name = name;
 		this.fullHealth = fullHealth;
 		this.currentHealth = fullHealth;
+		this.damage = damage;
 		return this;								
 	},
 
-	greet : function () {
+	greet : function() {
 		console.log("Hi! I'm a monster, and my name is " + this.name);
 	}
-
 };
 
 
 var catMonster = Object.create(Monster);
 catMonster.constructor = function (name, fullHealth, damage) {
 	Monster.constructor.apply(this, arguments);                     
-																  
-	this.scratch =  function(){};
-	return this;									
+			
+	this.scratch = function(obj){
+		obj.currentHealth -= this.damage;
+		if (obj.currentHealth > 0) {
+			console.log(obj.currentHealth);
+		} else {
+			console.log("Monster " + obj.name + " is dead");
+		}
+	}
+
+	 return this;
 };
 
+
+	
 
 var birdMonster = Object.create(Monster);
 birdMonster.constructor = function (name, fullHealth, damage) {
 	Monster.constructor.apply(this, arguments);                     
-																 
-	this.peck =  function(){};
-	return this;									
+			
+		this.peck = function(obj){
+		obj.currentHealth -= this.damage;
+		if (obj.currentHealth > 0) {
+			console.log(obj.currentHealth);
+		} else {
+			console.log("Monster " + obj.name + " is dead");
+		}
+	}
+
+	return this;							
 };
+
 
 
 var megacat = Object.create(catMonster).constructor("Мегакот", 50, 5);
